@@ -10,38 +10,46 @@
 
 
 
-string value = "helo,2,world,:-)";
-//string value = "1234,1567,-2,computer science";
-//string value = "Russia,Denmark,Kazan";
-
-string[] words = value.Split(','); //Разделяем строку на слова или набор символов через указанный разделитель.
-int count = 0;
-foreach (var item in words)  //Считаем кол-во слов.
-{
-    count++;
-    Console.WriteLine(item);
-}
+string value1 = "helo,2,world,:-)";
+string value2 = "1234,1567,-2,computer science";
+string value3 = "Russia,Denmark,Kazan";
 
 int min = 3;  //3 символа из условия задачи.
-int countTask = 0;
-for (int a = 0; a < count; a++)  //Находим кол-во слов для массива.
-{
-    if (words[a].Length <= min)
-    { 
-       countTask++;
-    }
-}
+string[] textTask1 = SplitWorld(value1, min);
+string[] textTask2 = SplitWorld(value2, min);
+string[] textTask3 = SplitWorld(value3, min);
+Console.WriteLine("[" + String.Join(", ", textTask1) + "]");
+Console.WriteLine("[" + String.Join(", ", textTask2) + "]");
+Console.WriteLine("[" + String.Join(", ", textTask3) + "]");
 
-int r = 0;
-string[] abc = new string[countTask];
-for (int q = 0; q < count; q++)   //Процесс заполнения массива.
+
+//Разделяем строку на слова или набор символов через указанный разделитель.
+string[] SplitWorld(string value, int min)
 {
-    if (words[q].Length <= min)
+    string[] words = value.Split(',');
+    int count = 0;
+    int countTask = 0;
+    foreach (var item in words)  //Считаем кол-во слов.
     {
-        abc[r] = words[q];
-        r++;
+        count++;
     }
+    for (int i = 0; i < count; i++)   //кол-во слов согласно условию.
+    {
+        if (words[i].Length <= min)
+        {
+            countTask++;
+        }
+    }
+    int r = 0;
+    string[] textTask = new string[countTask];
+    for (int j = 0; j < count; j++)   //Процесс заполнения массива.
+    {
+        if (words[j].Length <= min)
+        {
+             textTask[r] = words[j];
+            r++;
+        }
+    }
+    return textTask;
 }
-Console.WriteLine();
-Console.Write("[" + String.Join(", ", abc) + "]");
 
